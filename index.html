@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/master.css">
+    <link rel="stylesheet" href="css/output.css">
+</head>
+<body>
+    <main class="w-full h-[100vh] flex justify-center items-center bg-slate-500">
+        <section class="carousel w-full h-full relative bg-red-600  overflow-hidden">
+          
+            <div class="slides w-full h-full p-3">
+                <div class="slide border w-full h-full absolute top-0 bg-bg_1 after:content-[' '] after:absolute after:flex after:top-0 after:left-0 after:w-full after:h-full after:bg-[#1e293b] after:opacity-80"><div class="txt bg-bg_1">P</div><div class="absolute top-[48%] left-[40%] text-[60px] text-white z-50">PRAGUE</div></div>
+                <div class="slide border w-full h-full absolute top-0 bg-bg_2 after:content-[' '] after:absolute after:flex after:top-0 after:left-0 after:w-full after:h-full after:bg-[#1e293b] after:opacity-80"><div class="txt bg-bg_2">A</div><div class="absolute top-[48%] left-[40%] text-[60px] text-white z-50">AMSTERDAM</div></div>
+                <div class="slide border w-full h-full absolute top-0 bg-bg_3 after:content-[' '] after:absolute after:flex after:top-0 after:left-0 after:w-full after:h-full after:bg-[#1e293b] after:opacity-80"><div class="txt bg-bg_3">R</div><div class="absolute top-[48%] left-[40%] text-[60px] text-white z-50">ROME</div></div>
+                <div class="slide border w-full h-full absolute top-0 bg-bg_4 after:content-[' '] after:absolute after:flex after:top-0 after:left-0 after:w-full after:h-full after:bg-[#1e293b] after:opacity-80"><div class="txt bg-bg_4">N</div><div class="absolute top-[48%] left-[40%] text-[60px] text-white z-50">NEW YORK</div></div>
+                <div class="slide border w-full h-full absolute top-0 bg-bg_5 after:content-[' '] after:absolute after:flex after:top-0 after:left-0 after:w-full after:h-full after:bg-[#1e293b] after:opacity-80"><div class="txt bg-bg_5">S</div><div class="absolute top-[48%] left-[40%] text-[60px] text-white z-50">SINGAPORE</div></div>
+               
+            </div>
+
+            
+            <div class="buttons">
+                <button id="nxt" onclick="nxt()" class="text-slate-300 text-[25px] absolute top-[49%] left-[90%] z-50">NEXT</button>
+                <button id="pre" onclick="pre()" class="text-slate-300 text-[25px] absolute top-[49%] left-[5%] z-50">PREVIOUS</button>
+            </div>
+            <div class="w-full flex justify-center  h-[50px] absolute bottom-2 left-0">
+                <ul class="list flex justify-between items-center h-[50px] w-[15%]">
+                    <li class="w-[30px] h-[30px] rounded-full  p-[1px] border cursor-pointer"></li>
+                    <li class="w-[30px] h-[30px] rounded-full  p-[1px] border cursor-pointer"></li>
+                    <li class="w-[30px] h-[30px] rounded-full  p-[1px] border cursor-pointer"></li>
+                    <li class="w-[30px] h-[30px] rounded-full  p-[1px] border cursor-pointer"></li>
+                    <li class="w-[30px] h-[30px] rounded-full  p-[1px] border cursor-pointer"></li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        let _slides = document.querySelectorAll('main>.carousel>.slides>.slide')
+        let _li = document.querySelectorAll('.list>li')
+        let lngth = _slides.length
+        let currenIndex = 0
+ 
+        _slides.forEach((val)=>{
+            val.style.left = 0
+            val.style.transform = 'translateX(-100%)'
+        })
+        _slides[currenIndex].style.transform = 'translateX(0)'
+        _li[currenIndex].style.background = 'white'
+        
+        function pre(){
+            if(currenIndex<=4 && currenIndex>=1){
+                _slides[currenIndex].style.transform = 'translateX(-100%)'
+                currenIndex -= 1
+                _slides[currenIndex].style.transform = 'translateX(0)'
+                reset_circles()
+                _li[currenIndex].style.background = 'white'
+
+            }
+        }
+        function nxt(){
+            if(currenIndex<=3 && currenIndex>=0){
+                _slides[currenIndex].style.transform = 'translateX(100%)'
+                currenIndex += 1
+                _slides[currenIndex].style.transform = 'translateX(0)'
+                reset_circles()
+                _li[currenIndex].style.background = 'white'
+
+            }
+
+        }
+
+        function reset_circles(){
+            _li.forEach((z)=>{
+                    z.style.background ='transparent'
+                })           
+        }
+        _li.forEach((j , index)=>{
+            j.addEventListener('click',(e)=>{ 
+                reset_circles()
+                j.style.background = 'white'
+                let count = 0
+                if(currenIndex>index){
+                    count = currenIndex - index
+                    for(let k=0 ; k<count ; k++){
+                        pre()
+                    }
+                }
+                else if(currenIndex<index){
+                    count =  index - currenIndex 
+                    for(let k=0 ; k<count ; k++){
+                        nxt()
+                    }
+                }
+
+            })
+        })
+        
+
+    </script>
+    
+</body>
+</html>
