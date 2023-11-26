@@ -1,7 +1,7 @@
 # trick14-carousel
 
 
-- [Demo Project](https://katayoon-faraji-web.github.io/trick12-ToDoList/)
+- [Demo Project](https://katayoon-faraji-web.github.io/trick14-carousel/)
 
 - Developed by katayoon faraji
 
